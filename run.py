@@ -42,6 +42,29 @@ async def main():
                 file_name=f"{timestamp}.jpg",
                 mime="image/jpeg",
             )
+            save_to_local(image=image, qr_image=qr_code_image, timestamp=timestamp)
+
+
+def save_to_local(image, qr_image, timestamp):
+    # Define the directory path using the timestamp
+    directory = f"image_dump/{timestamp}"
+    
+    # Ensure the directory exists
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    # Define the file paths for the image and QR code
+    image_path = os.path.join(directory, "image.jpg")
+    qr_image_path = os.path.join(directory, "qr_image.jpg")
+    
+    # Save the image
+    with open(image_path, "wb") as img_file:
+        img_file.write(image.getvalue())
+    
+    # Save the QR code image
+    qr_image.save(qr_image_path)
+    
+    print(f"Images saved to {directory}")
 
 
 if __name__ == "__main__":
