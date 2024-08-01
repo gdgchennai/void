@@ -35,6 +35,7 @@ async def main():
             qr_code_image = qrcode.make(image_url)
             # convert to byte stream
             qr_code_image = qr_code_image._img.convert("RGB")
+            # https://void-ui.meetups.city/1722524058
             st.image(qr_code_image, caption="QR Code Image")
             st.download_button(
                 label="Download Image",
